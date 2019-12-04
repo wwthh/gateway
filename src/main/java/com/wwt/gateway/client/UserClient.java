@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
  */
 public class UserClient {
     public JSONObject getUserByEmail(String email) {
-        String response = new RestTemplate().getForObject("http://localhost:8080/USER-SERVICE/user/email/"+email, String.class);
+        String response = new RestTemplate().getForObject("http://localhost:8080/USER-SERVICE/users/email/"+email, String.class);
         System.out.println(response);
         return JSONObject.parseObject(response);
     }
