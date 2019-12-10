@@ -27,7 +27,7 @@ public class LoginFilter implements GatewayFilter, Ordered {
         String password = request.getQueryParams().getFirst(PASSWORD);
         JSONObject simpleUser = new UserClient().getUserByEmail(email);
         String token;
-        if (simpleUser.getString("email")==null || simpleUser.getString("password")==null) {
+        if (simpleUser==null || simpleUser.getString("email")==null || simpleUser.getString("password")==null) {
             token = "1";
         } else if(password == null || !password.equals(simpleUser.getString("password"))){
             token = "2";

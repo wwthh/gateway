@@ -19,7 +19,7 @@ public class GatewayApplication {
 
 	@Bean
 	public RouteLocator loginRouteLocator(RouteLocatorBuilder builder) {
-		return builder.routes().route(r -> r.path("/v1/login").filters(f->f.stripPrefix(1)).uri("lb://USER-SERVICE").id("login").filter(new LoginFilter())).build();
+		return builder.routes().route(r -> r.path("/v1/users/login").filters(f->f.stripPrefix(2)).uri("lb://USER-SERVICE").id("login").filter(new LoginFilter())).build();
 	}
 
 	@Bean
