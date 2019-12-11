@@ -19,9 +19,13 @@ public class AuthenticateFilter implements GatewayFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        String jwt = request.getHeaders().getFirst("token");
-        String userId = JWTUtils.getUserIdFromJWT(jwt);
-        if(userId==null) userId = "";
+        String userId;
+        try {
+            String jwt = request.getHeaders().getFirst("token");
+            userId = JWTUtils.getUserIdFromJWT(jwt);
+        } catch (Exception e){
+            userId = "";
+        }
         // 修改request中的header
         request = request.mutate().header("userId", userId).build();
         return chain.filter(exchange.mutate().request(request).build());
